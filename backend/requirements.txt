@@ -1,10 +1,14 @@
+
 fastapi
 uvicorn
 langchain
 langchain-core
 langchain-groq
+langchain-tavily
+langgraph
 pydantic
 python-dotenv
 langchain-community
-tavily-python
-langgraph
+httpx
+
+
