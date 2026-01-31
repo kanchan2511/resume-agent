@@ -8,6 +8,9 @@ function App() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+  console.log(API_URL)
+
   const analyzeResume = async () => {
     if (!resumeText) return alert("Please paste a resume first!");
     
@@ -15,7 +18,7 @@ function App() {
     setResult(null); // Clear old results
 
     try {
-      const res = await axios.post("http://127.0.0.1:8000/analyze-resume", {
+      const res = await axios.post(`${API_URL}/analyze-resume`, {
         text: resumeText,
       });
       

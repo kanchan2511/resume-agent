@@ -4,6 +4,8 @@ from fastapi import FastAPI, Request
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 
 # Import your local modules
 from schemas import ResumeRequest
@@ -45,7 +47,11 @@ async def stream_logs(request: Request):
 
     return StreamingResponse(log_generator(), media_type="text/event-stream")
 
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+
 @app.post("/analyze-resume")
+@limiter.limit("5/minute")
 async def analyze(req: ResumeRequest):
     """
     Main analysis endpoint that pushes logs and returns AI data.
