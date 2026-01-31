@@ -15,7 +15,7 @@ app = FastAPI()
 # 1. Enable CORS for React
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://resume-agent-1-oc9t.onrender.com"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
