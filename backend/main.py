@@ -23,6 +23,11 @@ app.add_middleware(
 # Global list to hold log messages for the UI
 logs = []
 
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+
 @app.get("/stream-logs")
 async def stream_logs(request: Request):
     """
